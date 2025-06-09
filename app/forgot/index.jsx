@@ -3,26 +3,29 @@ import { useRouter } from 'expo-router';
 import useUserStore from '../../stores/userStore';
 
 
-export default function LogInScreen() {
+export default function ForgotPasswordScreen() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Вхід у акаунт</Text>
+      <Text style={styles.title}>Відновлення паролю</Text>
+      <Text style={styles.description}>
+        Введіть вашу електронну пошту і ми надішлемо інструкції
+      </Text>
 
-      <TextInput style={styles.input} placeholder="Email" placeholderTextColor="#999" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Пароль" placeholderTextColor="#999" secureTextEntry />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor="#999"
+        keyboardType="email-address"
+      />
 
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Увійти</Text>
+        <Text style={styles.buttonText}>Відновити</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.push('/signup')}>
-        <Text style={styles.link}>Немає акаунта? Зареєструватися</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => router.push('/forgot')}>
-        <Text style={styles.link}>Забули пароль?</Text>
+      <TouchableOpacity onPress={() => router.back()}>
+        <Text style={styles.back}>Назад до входу</Text>
       </TouchableOpacity>
     </View>
   );
@@ -36,10 +39,16 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#4A3F35',
-    marginBottom: 24,
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  description: {
+    fontSize: 14,
+    color: '#6E665E',
+    marginBottom: 32,
     textAlign: 'center',
   },
   input: {
@@ -62,8 +71,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
   },
-  link: {
-    marginTop: 16,
+  back: {
+    marginTop: 20,
     textAlign: 'center',
     color: '#777',
     fontSize: 14,

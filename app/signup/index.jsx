@@ -1,18 +1,54 @@
+import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import useUserStore from '../../stores/userStore';
 
 export default function SignUpScreen() {
   const router = useRouter();
+  const { setUser } = useUserStore();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignup = () => {
+    if (!name || !email || !password) return;
+
+    setUser({ name, email });
+    router.push('/home');
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Створити акаунт</Text>
 
-      <TextInput style={styles.input} placeholder="Ім’я" placeholderTextColor="#999" />
-      <TextInput style={styles.input} placeholder="Email" placeholderTextColor="#999" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Пароль" placeholderTextColor="#999" secureTextEntry />
+      <TextInput
+        style={styles.input}
+        placeholder="Ім’я"
+        placeholderTextColor="#999"
+        value={name}
+        onChangeText={setName}
+      />
 
-      <TouchableOpacity style={styles.button}>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor="#999"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Пароль"
+        placeholderTextColor="#999"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+
+      <TouchableOpacity style={styles.button} onPress={handleSignup}>
         <Text style={styles.buttonText}>Зареєструватися</Text>
       </TouchableOpacity>
 
