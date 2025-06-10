@@ -15,7 +15,7 @@ export default function SignUpScreen() {
     if (!name || !email || !password) return;
 
     setUser({ name, email });
-    router.push('/home');
+    router.push('/match');
   };
 
   return (
